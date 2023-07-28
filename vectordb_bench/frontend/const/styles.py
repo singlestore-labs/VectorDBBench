@@ -44,6 +44,7 @@ DB_TO_ICON = {
     DB.WeaviateCloud: "https://assets.zilliz.com/weaviate_4f6f171ebe.png",
     DB.PgVector: "https://assets.zilliz.com/PG_Vector_d464f2ef5f.png",
     DB.Chroma: "https://assets.zilliz.com/chroma_ceb3f06ed7.png", 
+    DB.SingleStoreDB: "https://raw.githubusercontent.com/singlestore-labs/spaces-notebooks/master/common/images/singlestore-logo-100.png", 
 }
 
 # RedisCloud color: #0D6EFD
@@ -56,4 +57,5 @@ COLOR_MAP = {
     DB.QdrantCloud.value: "#D91AD9",
     DB.WeaviateCloud.value: "#20C997",
     DB.PgVector.value: "#4C779A",
+    DB.SingleStoreDB.value: "#B50FFF",
 }

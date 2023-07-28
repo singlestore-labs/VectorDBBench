@@ -23,7 +23,6 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import (
     declarative_base, 
-    mapped_column, 
     Session
 )
 
