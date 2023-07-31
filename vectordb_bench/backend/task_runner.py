@@ -87,7 +87,7 @@ class CaseRunner(BaseModel):
             self.init_db(drop_old)
         except Exception as e:
             log.warning(f"pre run case error: {e}")
-            raise e from None
+            raise e
 
     def run(self, drop_old: bool = True) -> Metric:
         self._pre_run(drop_old)
@@ -113,7 +113,7 @@ class CaseRunner(BaseModel):
             count = runner.run_endlessness()
         except Exception as e:
             log.warning(f"Failed to run capacity case, reason = {e}")
-            raise e from None
+            raise e
         else:
             log.info(f"Capacity case loading dataset reaches VectorDB's limit: max capacity = {count}")
             return Metric(max_load_count=count)
@@ -142,7 +142,7 @@ class CaseRunner(BaseModel):
         except Exception as e:
             log.warning(f"Failed to run performance case, reason = {e}")
             traceback.print_exc()
-            raise e from None
+            raise e
         else:
             log.info(f"Performance case got result: {m}")
             return m
@@ -154,7 +154,7 @@ class CaseRunner(BaseModel):
             runner = SerialInsertRunner(self.db, self.ca.dataset, self.normalize, self.ca.load_timeout)
             runner.run()
         except Exception as e:
-            raise e from None
+            raise e
         finally:
             runner = None
 
@@ -170,7 +170,7 @@ class CaseRunner(BaseModel):
         except Exception as e:
             log.warning(f"search error: {str(e)}, {e}")
             self.stop()
-            raise e from None
+            raise e
 
     def _conc_search(self):
         """Performance concurrency tests, search the test data endlessness
@@ -183,7 +183,7 @@ class CaseRunner(BaseModel):
             return self.search_runner.run()
         except Exception as e:
             log.warning(f"search error: {str(e)}, {e}")
-            raise e from None
+            raise e
         finally:
             self.stop()
 
@@ -204,7 +204,7 @@ class CaseRunner(BaseModel):
                 raise PerformanceTimeoutError("Performance case optimize timeout") from e
             except Exception as e:
                 log.warning(f"VectorDB optimize error: {e}")
-                raise e from None
+                raise e
 
     def _init_search_runner(self):
         test_emb = np.stack(self.ca.dataset.test_data["emb"])
