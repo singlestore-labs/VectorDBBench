@@ -39,6 +39,7 @@ dependencies = [
     "psutil",
     "polars",
     "pgvector",
+    "singlestoredb[sqlalchemy]",
     "sqlalchemy",
     "chromadb",
 ]
