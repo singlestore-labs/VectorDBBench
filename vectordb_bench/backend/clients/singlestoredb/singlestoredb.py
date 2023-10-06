@@ -143,7 +143,12 @@ class SingleStoreDB(VectorDB):
     ) -> list[int]:
         assert self.s2_table is not None
         search_param = self.case_config.search_param()
-        op_fun = getattr(sa.func, search_param["metric_fun"])
+        if search_param["metric_fun"] == "cosine_distance":
+            op_fun = (lambda x, y: sa.func.dot_product(x, y) / 
+                                   (sa.func.sqrt(sa.func.dot_product(x, x) *
+                                    sa.func.dot_product(y, y))))
+        else:
+            op_fun = getattr(sa.func, search_param["metric_fun"])
         if filters:
             res = self.s2_session.scalars(select(self.s2_table).order_by(op_fun(self.s2_table.c.embedding, np.array(query, dtype='<f4'))).filter(self.s2_table.c.id > filters.get('id')).limit(k))
         else: 

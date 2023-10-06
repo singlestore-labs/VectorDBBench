@@ -22,17 +22,17 @@ class SingleStoreDBIndexConfig(BaseModel, DBCaseConfig):
 
     def parse_metric(self) -> str:
         if self.metric_type == MetricType.L2:
-            return ""
+            return "vector_l2_ops"
         elif self.metric_type == MetricType.IP:
-            return ""
-        return ""
+            return "vector_ip_ops"
+        return "vector_cosine_ops"
 
     def parse_metric_fun_str(self) -> str: 
         if self.metric_type == MetricType.L2:
             return "euclidian_distance"
         elif self.metric_type == MetricType.IP:
             return "dot_product"
-        return "dot_product"
+        return "cosine_distance"
 
     def index_param(self) -> dict:
         return {
